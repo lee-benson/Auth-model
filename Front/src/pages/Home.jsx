@@ -9,10 +9,6 @@ export default function Home() {
     getPosts().then(setPosts)
   }, [])
 
-  useEffect(() => {
-    console.log(posts);
-  }, [posts])
-
   return (
     <div>
       {posts.map(el => (
