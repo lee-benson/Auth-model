@@ -1,7 +1,9 @@
 import mongoose from "mongoose";
 
+
 export const userSchema = new mongoose.Schema({
   username: String,
+  hash: String,
   handle: {
     type: String,
     unique: true,
