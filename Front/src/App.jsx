@@ -3,6 +3,8 @@ import Home from './pages/Home';
 import NewPost from './pages/NewPost';
 import PostDetails from './pages/PostDetails';
 import Profile from './pages/Profile';
+import Signin from './pages/Signin';
+import Signup from './pages/Signup';
 
 function App() {
   return (
@@ -18,6 +20,8 @@ function App() {
         <Route path="/:handle" element={<Profile />} />
         <Route path="/post/:id" element={<PostDetails />} />
         <Route path="/new" element={<NewPost />} />
+        <Route path="/auth/signup" element={<Signup />} />
+        <Route path="/auth/signin" element={<Signin />} />
       </Routes>
     </>
   );
