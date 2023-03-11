@@ -1,7 +1,7 @@
-import { Router } from "express"
+import { Router } from "express";
 import bcrypt from 'bcrypt'
-import User from '../models/users.js'
 import jwt from 'jsonwebtoken'
+import User from '../models/users.js'
 
 const TOKEN_KEY = process.env.TOKEN_KEY
 
@@ -12,7 +12,6 @@ function getExpiration() {
 }
 
 const router = Router()
-
 
 router.post('/signup', async (req, res) => {
   // handle user input
@@ -27,7 +26,9 @@ router.post('/signup', async (req, res) => {
   })
 
   const data = {
-    exp: getExpiration()
+    id: user._id,
+    handle: user.handle,
+    exp: getExpiration(),
   }
 
   // sign the jwt
@@ -38,7 +39,7 @@ router.post('/signup', async (req, res) => {
 })
 
 router.post('/signin', async (req, res) => {
-  //handle user input
+  // handle user input
   const { username, password } = req.body
   // Get user's password hash
   const user = await User.findOne({ handle: username })
@@ -55,7 +56,9 @@ router.post('/signin', async (req, res) => {
   // Same code as signup from this point onwards
 
   const data = {
-    exp: getExpiration()
+    id: user._id,
+    handle: user.handle,
+    exp: getExpiration(),
   }
 
   // sign the jwt
@@ -64,6 +67,5 @@ router.post('/signin', async (req, res) => {
   // return the token
   return res.json(token)
 })
-
 
 export default router

@@ -1,5 +1,8 @@
 import Post from '../models/posts.js'
 import User from '../models/users.js'
+import jwt from 'jsonwebtoken'
+
+const TOKEN_KEY = process.env.TOKEN_KEY
 
 export async function GetPosts(req, res) {
   const posts = await Post.find().populate('author')
@@ -15,9 +18,9 @@ export async function GetPostById(req, res) {
 
 export async function CreatePost(req, res) {
   const { username, twuut } = req.body
-  const user = await User.findOne({ handle: username })
+  // const user = await User.findOne({ handle: username })
   const newPost = await Post.create({
-    author: user._id,
+    author: req.id,
     date: new Date(),
     text: twuut,
   })
